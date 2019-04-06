@@ -46,3 +46,11 @@ a {
   margin-bottom: 2em;
   font-weight: 600;
 }
+.error-label {
+  color: $danger;
+  opacity: 0;
+  font-size: 0.8rem;
+  &--show {
+    opacity: 1;
+  }
+}

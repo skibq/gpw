@@ -9,4 +9,8 @@
   &__track-btn {
     margin-top: 60px;
   }
+  &__error {
+    margin-top: 25px;
+    transition: opacity 0.5s ease-in-out;
+  }
 }

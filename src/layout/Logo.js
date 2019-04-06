@@ -4,7 +4,7 @@ import '@/assets/styles/layout/logo.scss'
 export class Logo extends React.Component {
   render() {
     return (
-      <h2 class="nav-logo">Stock Tracker</h2>
+      <h2 className="nav-logo">Stock Tracker</h2>
     )
   }
 }
