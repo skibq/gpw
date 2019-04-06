@@ -1,0 +1,15 @@
+@import 'colors';
+
+.main-menu {
+  background-color: $basic-dark;
+  padding: 1em 0.5em;
+  &__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+  }
+  &__element {
+    padding: 0 1em;
+    color: $primary-color;
+  }
+}
