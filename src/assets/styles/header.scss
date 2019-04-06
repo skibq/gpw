@@ -1,0 +1,12 @@
+@import 'colors';
+
+.main-menu {
+  background-color: $primary-color;
+  &__list {
+    display: flex;
+    list-style: none;
+  }
+  &__element {
+
+  }
+}
