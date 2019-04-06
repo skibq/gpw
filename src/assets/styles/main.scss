@@ -1,4 +1,7 @@
+@import 'colors';
+
 /* Global styles, always imported */
+
 html {
   font-size: 16px;
 }
@@ -16,4 +19,21 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
   monospace;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+  transition: color 0.2s ease-in-out;
+  &:visited {
+    color: $primary-color;
+  }
+  &:hover {
+    color: darken($primary-color, 20)
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }

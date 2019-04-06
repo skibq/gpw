@@ -1,7 +1,7 @@
 import React from 'react'
-import 'src/assets/styles/header.scss'
+import '@/assets/styles/header/logo.scss'
 
-export class Header extends React.Component {
+export class Logo extends React.Component {
   render() {
     return (
       <h2 class="nav-logo">Stock Tracker</h2>

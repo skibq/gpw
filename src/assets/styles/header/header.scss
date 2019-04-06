@@ -1,7 +1,13 @@
-@import 'colors';
+@import '../colors';
 
-.main-menu {
+.top-bar {
   background-color: $basic-dark;
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+}
+.main-menu {
   padding: 1em 0.5em;
   &__list {
     display: flex;
@@ -10,6 +16,5 @@
   }
   &__element {
     padding: 0 1em;
-    color: $primary-color;
   }
 }
