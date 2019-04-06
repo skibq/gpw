@@ -5,7 +5,7 @@ export class Companies extends React.Component {
   render() {
     return (
       <div>
-        Hello from companies
+        <h1 class="page-title">Companies</h1>
       </div>
     )
   }

@@ -1,0 +1,12 @@
+@import '../colors';
+
+.new-company{
+  &__newinfo {
+    color: $info;
+    margin-top: 0.3em;
+    font-size: 0.8rem;
+  }
+  &__track-btn {
+    margin-top: 60px;
+  }
+}

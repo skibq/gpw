@@ -1,0 +1,10 @@
+@import '../colors';
+
+.footer {
+  background-color: $basic-dark;
+  padding: 0.8rem 0;
+  &__content {
+    color: $secondary-color;
+    text-align: center;
+  }
+}

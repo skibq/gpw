@@ -1,12 +1,12 @@
 import React from 'react'
 import { Logo } from './Logo.js'
-import '@/assets/styles/header/header.scss'
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import '@/assets/styles/layout/header.scss'
+import { Link } from "react-router-dom";
 
 export class Header extends React.Component {
   render() {
     return (
-      <div className="top-bar">
+      <header className="top-bar">
         <div className="top-bar__container container">
           <Logo />
           <nav className="main-menu">
@@ -20,7 +20,7 @@ export class Header extends React.Component {
             </ul>
           </nav>
         </div>
-      </div>
+      </header>
     )
   }
 }
