@@ -1,13 +1,11 @@
 import axios from 'axios'
 
-const API_KEY = '27AJ77PBRU1L8M'
-
 export const getCompanyBySymbol = (query) => {
-  return axios.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${query}&apikey=${API_KEY}`);
+  return axios.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${query}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`);
 };
 
 export const getAdditionalCompanyData = (symbol) => {
-  return axios.get(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${symbol}&apikey=${API_KEY}`);
+  return axios.get(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${symbol}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`);
 };
 
 export const getDomainAndLogo = (name) => {
