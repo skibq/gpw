@@ -55,6 +55,10 @@ class NewCompanyComponent extends React.Component {
     getCompanyBySymbol(this.state.symbolValue).then((res) => {
       if (res.data['Global Quote'] && res.data['Global Quote']['01. symbol']) {
         let company = this.formatCompanyData(res.data['Global Quote']);
+        if ( this.props.companies.find((savedCompany) => savedCompany.symbol === company.symbol) ) {
+          this.showError('You already saved this company. You can view it in "Companies" tab.')
+          return
+        }
         getAdditionalCompanyData(company.symbol).then(({data: {bestMatches}}) => {
           if (bestMatches && bestMatches.length && bestMatches[0]['1. symbol'] === company.symbol) {
             company = this.formatCompanyDetails(company, bestMatches[0]);
@@ -66,11 +70,17 @@ class NewCompanyComponent extends React.Component {
                 logo: data[0].logo
               };
               this.props.addCompany(company);
-            }).catch(() => this.props.addCompany(company))
+              this.props.history.push('/')
+            }).catch(() => {
+              this.props.addCompany(company);
+              this.props.history.push('/')
+            })
           }
-        }).catch(() => this.props.addCompany(company));
+        }).catch(() => {
+          this.props.addCompany(company);
+          this.props.history.push('/')
+        });
         this.setState({symbolValue: ''});
-        this.props.history.push('/')
       } else {
         this.showError('We don`t found company with that symbol. Please make sure, its correct.')
       }
@@ -90,7 +100,12 @@ class NewCompanyComponent extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  companies: state.companies
+});
+
 export const NewCompany =  connect(
-  null,
+  mapStateToProps,
   { addCompany }
 )(NewCompanyComponent);

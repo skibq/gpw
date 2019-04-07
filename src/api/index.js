@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_KEY = '27AJ77PBRU1L8M1E'
+const API_KEY = '27AJ77PBRU1L8M'
 
 export const getCompanyBySymbol = (query) => {
   return axios.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${query}&apikey=${API_KEY}`);

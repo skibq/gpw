@@ -6,16 +6,19 @@ import { Link } from "react-router-dom";
 
 export class CompaniesComponent extends React.Component {
   render() {
-    const list = this.props.companies.map((company) =>
-      <ul className="companies">
-          <SingleCompany company={company} />
-      </ul>
-    );
+    let list;
+    if (this.props.companies) {
+      list = this.props.companies.map((company, index) =>
+        <SingleCompany company={company} index={index} key={company.name}/>
+      );
+    }
     return (
       <div>
         <h1 className="page-title">Companies</h1>
-        { this.props.companies.length > 0 ? (
-          list
+        { ( this.props.companies && this.props.companies.length > 0 ) ? (
+          <ul className="companies">
+            { list }
+          </ul>
           ) : (
           <div>There are no companies yet. <Link to={`/new-company`}>Track your first company</Link></div>
         )}
