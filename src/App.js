@@ -10,7 +10,7 @@ import '@/assets/styles/app.scss';
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router basename={process.env.REACT_APP_BASE_PATH}>
         <div className="App">
           <Header />
           <div className="page-container container">

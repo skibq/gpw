@@ -1,7 +1,8 @@
 {
-  "name": "gpw",
+  "name": "stock-tracer",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://skibq.github.io/stock-tracer/",
   "dependencies": {
     "@babel/core": "7.2.2",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
@@ -28,6 +29,7 @@
     "eslint-plugin-react": "7.12.4",
     "file-loader": "2.0.0",
     "fs-extra": "7.0.1",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.6.0",
@@ -63,6 +65,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b gh-pages -d build",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

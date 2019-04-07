@@ -7,7 +7,6 @@ const initialState = () => {
 };
 
 export const rootReducer = (state = initialState(), action) => {
-  console.log(state)
   switch (action.type) {
     case 'ADD_COMPANY':
       console.log(state.companies)
