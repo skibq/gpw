@@ -1,10 +1,12 @@
 import React from 'react'
-import '@/assets/styles/companies/companies.scss'
 import { Input } from '@/components/global-components/Input';
 import { Button } from '@/components/global-components/Button';
 import { getCompanyBySymbol } from "@/api/alphavantage";
+import { connect } from 'react-redux'
+import { addCompany } from '@/store/actions';
+import '@/assets/styles/companies/companies.scss'
 
-export class NewCompany extends React.Component {
+class NewCompanyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,10 +28,23 @@ export class NewCompany extends React.Component {
     }, 5000)
   }
 
+  formatCompanyData(company) {
+    return {
+      symbol: company['01. symbol'],
+      closed: company['07. latest trading day'],
+      price: Math.round(company['05. price'] * 100) / 100,
+      change: Math.round(company['09. change'] * 1000) / 1000,
+      changePercent: Math.round(company['10. change percent'].replace('%', '') * 1000) / 1000,
+      positiveChange: company['09. change'] > 0
+    }
+  }
+
   findSymbol = () => {
     getCompanyBySymbol(this.state.symbolValue).then((res) => {
       if (res.data['Global Quote']) {
-        // save this data
+        const company = this.formatCompanyData(res.data['Global Quote'])
+        this.props.addCompany(company);
+        this.setState({symbolValue: ''});
       } else {
         this.showError('We don`t found company with that symbol. Please make sure, its correct.')
       }
@@ -49,3 +64,7 @@ export class NewCompany extends React.Component {
     )
   }
 }
+export const NewCompany =  connect(
+  null,
+  { addCompany }
+)(NewCompanyComponent);
