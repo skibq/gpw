@@ -2,6 +2,7 @@ import React from 'react'
 import '@/assets/styles/companies/companies.scss'
 import { connect } from 'react-redux'
 import { SingleCompany } from '@/components/companies/SingleCompany'
+import { Link } from "react-router-dom";
 
 export class CompaniesComponent extends React.Component {
   render() {
@@ -13,7 +14,11 @@ export class CompaniesComponent extends React.Component {
     return (
       <div>
         <h1 className="page-title">Companies</h1>
-        { list }
+        { this.props.companies.length > 0 ? (
+          list
+          ) : (
+          <div>There are no companies yet. <Link to={`/new-company`}>Track your first company</Link></div>
+        )}
       </div>
     )
   }

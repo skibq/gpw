@@ -3,29 +3,34 @@ import '@/assets/styles/companies/companies.scss'
 
 export class SingleCompany extends React.Component {
   render() {
+    const company = this.props.company;
     return (
       <li className="company">
-        <div className="company__image">
+        <div className="company__image-container">
+          <img src={company.name} alt=""/>
         </div>
         <div className="company__info">
           <div className="company__line">
-            <span className="company__symbol">{this.props.company.symbol}</span>
+            <strong className="company__name">{company.name}</strong>
+            <span className="company__symbol">{company.symbol}</span>
+            <span className="company__website">{company.website}</span>
           </div>
           <div className="company__line">
-            <span className="company__price">{this.props.company.price}</span>
-            <span
-              className={"company__change company__change" + (this.props.company.positiveChange ? '--positive' : '--negative') }
-            >
+            <span className="company__region">{company.region}</span>
+            <span className="company__open">{company.marketOpen}</span>
+            -
+            <span className="company__close">{company.marketClose}</span>
+            <span className="company__timezone">{company.timezone}</span>
+          </div>
+          <div className="company__line">
+            <span className="company__price">{company.price}</span>
+            <span className="company__currency">{company.currency}</span>
+            <span className={"company__change company__change" + (company.positiveChange ? '--positive' : '--negative') }>
               {this.props.company.change}
             </span>
-            <span
-              className={"company__change-percent company__change-percent" + (this.props.company.positiveChange ? '--positive' : '--negative') }
-            >
-              ({this.props.company.changePercent}%)</span>
-            <span className="company__closed">Closed: {this.props.company.closed}</span>
-          </div>
-          <div className="company__line">
-            <span> another informations </span>
+            <span className={"company__change-percent company__change-percent" + (company.positiveChange ? '--positive' : '--negative') }>
+              ({company.changePercent}%)</span>
+            <span className="company__closed">Closed: {company.closed}</span>
           </div>
         </div>
       </li>

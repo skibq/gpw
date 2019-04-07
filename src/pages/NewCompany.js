@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input } from '@/components/global-components/Input';
 import { Button } from '@/components/global-components/Button';
-import { getCompanyBySymbol } from "@/api/alphavantage";
+import { getCompanyBySymbol, getAdditionalCompanyData, getDomainAndLogo } from "@/api";
 import { connect } from 'react-redux'
 import { addCompany } from '@/store/actions';
 import '@/assets/styles/companies/companies.scss'
@@ -39,12 +39,38 @@ class NewCompanyComponent extends React.Component {
     }
   }
 
+  formatCompanyDetails(company, match) {
+    return {
+      ...company,
+      name: match['2. name'],
+      region: match['4. region'],
+      timezone: match['7. timezone'],
+      marketOpen: match['5. marketOpen'],
+      marketClose: match['6. marketClose'],
+      currency: match['8. currency']
+    };
+  }
+
   findSymbol = () => {
     getCompanyBySymbol(this.state.symbolValue).then((res) => {
-      if (res.data['Global Quote']) {
-        const company = this.formatCompanyData(res.data['Global Quote'])
-        this.props.addCompany(company);
+      if (res.data['Global Quote'] && res.data['Global Quote']['01. symbol']) {
+        let company = this.formatCompanyData(res.data['Global Quote']);
+        getAdditionalCompanyData(company.symbol).then(({data: {bestMatches}}) => {
+          if (bestMatches && bestMatches.length && bestMatches[0]['1. symbol'] === company.symbol) {
+            company = this.formatCompanyDetails(company, bestMatches[0]);
+            const requestName = company.name.replace('Inc.', '').replace('L.P.', '')
+            getDomainAndLogo(requestName).then(({data}) => {
+              company = {
+                ...company,
+                domain: data[0].domain,
+                logo: data[0].logo
+              };
+              this.props.addCompany(company);
+            }).catch(() => this.props.addCompany(company))
+          }
+        }).catch(() => this.props.addCompany(company));
         this.setState({symbolValue: ''});
+        this.props.history.push('/')
       } else {
         this.showError('We don`t found company with that symbol. Please make sure, its correct.')
       }
